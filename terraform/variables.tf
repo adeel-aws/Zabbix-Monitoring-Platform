@@ -58,8 +58,8 @@ variable "app_ingress_rules" {
 
 ####      EC2     ####
 variable "instance_name" {
-   type = string
- }
+  type = string
+}
 variable "ami_id" {
   type = string
 }

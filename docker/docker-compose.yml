@@ -47,12 +47,12 @@ services:
       - mysql
       - zabbix-server
 
-  zabbix-agent:
-    image: zabbix/zabbix-agent2:alpine-latest
-    container_name: zabbix-agent
-    restart: unless-stopped
-    environment:
-      ZBX_HOSTNAME: zabbix-server
+  # zabbix-agent:
+  #   image: zabbix/zabbix-agent2:alpine-latest
+  #   container_name: zabbix-agent
+  #   restart: unless-stopped
+  #   environment:
+  #     ZBX_HOSTNAME: zabbix-server
 
   grafana:
     image: grafana/grafana:latest

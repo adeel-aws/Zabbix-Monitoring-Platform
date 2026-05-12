@@ -17,26 +17,26 @@ create_db_sg  = false
 
 db_port = 27017
 
-  app_ingress_rules = [
-    {
-      from_port       = 80
-      to_port         = 80
-      protocol        = "tcp"
-      cidr_blocks = [ "0.0.0.0/0" ]
-    },
-    {
-      from_port       = 3000
-      to_port         = 3000
-      protocol        = "tcp"
-      cidr_blocks = [ "0.0.0.0/0" ]
-    },
-      {
-      from_port       = 10051
-      to_port         = 10051
-      protocol        = "tcp"
-      cidr_blocks = [ "0.0.0.0/0" ]
-    }
-  ]
+app_ingress_rules = [
+  {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  },
+  {
+    from_port   = 3000
+    to_port     = 3000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  },
+  {
+    from_port   = 10050
+    to_port     = 10050
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+]
 #### ELB SG RULES (ONLY PUBLIC ENTRY POINT)
 # elb_ingress_rules = [
 #   {
@@ -56,12 +56,12 @@ db_port = 27017
 
 ####   EC2   ####
 
-instance_name = "zabbix"
-instance_type = "t3.small"
-ami_id = "ami-0c7217cdde317cfec"
-enable_eip = false
-enable_ssm = true
-root_volume_size = 50
-root_volume_type = "gp3"
-enable_volume_encryption = true
+instance_name              = "zabbix"
+instance_type              = "t3.small"
+ami_id                     = "ami-0c7217cdde317cfec"
+enable_eip                 = false
+enable_ssm                 = true
+root_volume_size           = 50
+root_volume_type           = "gp3"
+enable_volume_encryption   = true
 enable_detailed_monitoring = true

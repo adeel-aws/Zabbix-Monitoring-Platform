@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "vpc" {
-  source = "../modules/VPC"
+  source = "../../modules/VPC"
 
   project_name    = var.project_name
   environment     = var.environment
@@ -19,12 +19,14 @@ module "vpc" {
   create_app_sg = var.create_app_sg
   create_elb_sg = var.create_elb_sg
   create_db_sg  = var.create_db_sg
+
+  app_ingress_rules = var.app_ingress_rules
 }
 
 ###      EC2    ####
 
 module "app_server" {
-  source = "./modules/ec2"
+  source = "../../modules/EC2"
 
   project_name = var.project_name
   environment  = var.environment
@@ -33,7 +35,7 @@ module "app_server" {
   ami_id        = var.ami_id
   instance_type = var.instance_type
 
-  subnet_id          = module.vpc.public_subnets[0]
+  subnet_id          = module.vpc.public_subnet_ids[0]
   security_group_ids = [module.vpc.app_sg_id]
 
   # Secure access without SSH
@@ -50,11 +52,11 @@ module "app_server" {
   # Monitoring
   enable_detailed_monitoring = var.enable_detailed_monitoring
 
-   # Bootstrapping
+  # Bootstrapping
   user_data = file("script.sh")
 
   tags = {
-    Owner = "DevOps-Team"
+    Owner   = "DevOps-Team"
     Service = "zabbix"
   }
 }
